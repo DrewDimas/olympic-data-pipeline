@@ -1,0 +1,22 @@
+# Ignore everything
+*
+
+# Allow .gitignore and .gitattributes
+!.gitignore
+!.gitattributes
+
+# Allow README.md
+!README.md
+
+# Allow specific directories and their contents
+!olympic-data-pipeline/
+!olympic-data-pipeline/***
+
+!workspaces/
+!workspaces/***
+
+# Except for JSON files and other potentially dangerous files globally
+# (Note: This won't work as intended because the global ignore has higher precedence)
+*.json
+*.env
+*.key
