@@ -19,3 +19,4 @@
 *.ipynb_checkpoints
 *.ssh_tunnel
 *gcs/google-cloud-sdk/***
+*metadata.yaml
