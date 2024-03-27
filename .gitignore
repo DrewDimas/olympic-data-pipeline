@@ -1,6 +1,3 @@
-# Ignore everything
-*
-
 # Allow .gitignore and .gitattributes
 !.gitignore
 !.gitattributes
@@ -9,10 +6,7 @@
 !README.md
 
 # Allow specific directories and their contents
-!olympic-data-pipeline/
 !olympic-data-pipeline/***
-
-!workspaces/
 !workspaces/***
 
 # Except for JSON files and other potentially dangerous files globally
@@ -20,3 +14,8 @@
 *.json
 *.env
 *.key
+
+# Exclude folders
+*.ipynb_checkpoints
+*.ssh_tunnel
+*gcs/google-cloud-sdk/***
