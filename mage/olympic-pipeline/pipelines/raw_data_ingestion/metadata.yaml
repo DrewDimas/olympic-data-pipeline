@@ -1,7 +1,9 @@
 blocks:
 - all_upstream_blocks_executed: true
   color: null
-  configuration: {}
+  configuration:
+    file_source:
+      path: data_loaders/raw_data_import.py
   downstream_blocks:
   - basic_data_transform
   executor_config: null
@@ -10,12 +12,12 @@ blocks:
   language: python
   name: raw_data_import
   retry_config: null
-  status: executed
+  status: not_executed
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: raw_data_import
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -32,7 +34,7 @@ blocks:
   upstream_blocks:
   - raw_data_import
   uuid: basic_data_transform
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks: []
@@ -70,5 +72,5 @@ spark_config: {}
 tags: []
 type: python
 uuid: raw_data_ingestion
-variables_dir: /home/codespace/.mage_data/olympic-pipeline
+variables_dir: /mage/olympic-pipeline/src
 widgets: []

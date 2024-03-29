@@ -1,7 +1,7 @@
 # Olympic Data Pipeline Overview
 
 Analyzing historical Olympic data (1896-2016) with a data pipeline
-
+-
 This document describes a data pipeline that leverages Terraform for infrastructure setup, Docker for containerized data processing with Mage and Apache Spark, Google BigQuery for data analysis and storage, and dbt (data build tool) for advanced data transformation and modeling. The pipeline integrates these technologies to streamline the process from data ingestion to visualization, ensuring a robust and scalable architecture for handling and analyzing large datasets.
 
 ## Terraform (Setup Infrastructure)

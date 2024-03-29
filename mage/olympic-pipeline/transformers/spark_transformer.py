@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, col, lit, when
+from pyspark.sql.types import StringType
 from pyspark.sql import DataFrame as PySparkDataFrame
+from pyspark.ml.feature import StringIndexer
+
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
 if 'test' not in globals():
@@ -19,18 +22,28 @@ def transform(data, *args, **kwargs):
     # If 'data' is a pandas DataFrame, convert it to a PySpark DataFrame
     if not isinstance(data, PySparkDataFrame):
         data = spark.createDataFrame(data)
-    
-    # Handling the data transformation
-    # Fill null values in 'Height' and 'Weight' columns with average values
-    #avg_height = data.agg(avg(col("Height")).alias("avg_height")).collect()[0]["avg_height"]
-    #avg_weight = data.agg(avg(col("Weight")).alias("avg_weight")).collect()[0]["avg_weight"]
-    #data = data.withColumn("Height", when(col("Height").isNull(), avg_height).otherwise(col("Height")))
-    #data = data.withColumn("Weight", when(col("Weight").isNull(), avg_weight).otherwise(col("Weight")))
 
-    # Filter out entries before the year 2000 for a more recent dataset analysis
-    data_recent = data.filter(col("Year") >= 2000)
+    # Check if 'ID' column exists before trying to drop it
+    if 'ID' in data.columns:
+        data = data.drop('ID')
+
+    # Replace null values in the "Medal" column with "No Medal"
+    data = data.withColumn("Medal", when(col("Medal").isNull(), lit("No Medal")).otherwise(col("Medal")))
+
+    #Converting to numeric indices for potential ML tasks:
+    indexer_sex = StringIndexer(inputCol="Sex", outputCol="Sex_Index")
+    data = indexer_sex.fit(data).transform(data)
+
+    indexer_season = StringIndexer(inputCol="Season", outputCol="Season_Index")
+    data = indexer_season.fit(data).transform(data)
+
+    # Filter out entries 
+    data_male = data.filter(col("Sex") == 'M')
     
-    return data_recent
+   # return {'data_recent': data_recent, 'data_female': data_female, 'data_male': data_male}
+    data_male = data_male.toPandas() 
+    return data_male
+
 
 @test
 def test_transform(output, *args) -> None:

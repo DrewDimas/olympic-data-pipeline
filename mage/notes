@@ -1,4 +1,9 @@
+# Build Mage docker image with Spark environment
+docker build -t mage_spark .
+
+# Start Mage with SPARK_MASTER_HOST environment variable
 docker run -it --name mage_spark -e SPARK_MASTER_HOST='local' -p 6789:6789 -v $(pwd):/home/src mage_spark \
   /app/run_app.sh mage start
 
-spark = kwargs['spark']
+# Start existing container
+docker start mage_spark -ai

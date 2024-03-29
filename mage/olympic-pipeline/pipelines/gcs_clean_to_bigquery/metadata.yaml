@@ -19,6 +19,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - spark_transformer
+  - spark_transformer_female
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -33,7 +34,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - gcs_to_bigquery
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -54,13 +56,47 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: shining scholar
+  name: gcs_to_bigquery
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
-  type: scratchpad
-  upstream_blocks: []
-  uuid: shining_scholar
+  type: data_exporter
+  upstream_blocks:
+  - spark_transformer
+  uuid: gcs_to_bigquery
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - gcs_to_bigquery_female
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: spark_transformer_female
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - import_gcs_parquet
+  uuid: spark_transformer_female
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: gcs_to_bigquery_female
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - spark_transformer_female
+  uuid: gcs_to_bigquery_female
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
