@@ -1,0 +1,6 @@
+version: 2
+
+seeds: 
+  - name: olympic_data_table
+    description: >
+      Table

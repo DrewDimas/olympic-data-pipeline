@@ -30,7 +30,7 @@ def load_data(*args, **kwargs):
     else:
         print(f"{local_filename} already exists.")
     
-    # Assuming the file is a CSV, adjust if different
+    # Read csv file into pandas dataframe
     data = pd.read_csv(local_filename)
     
     return data

@@ -7,36 +7,8 @@ if 'test' not in globals():
 
 @transformer
 def transform(data, *args, **kwargs):
-    """
-    Transformer block for cleaning and transforming the dataset.
 
-    Performs the following operations:
-        Drops the 'ID' column.
-        Converts specified columns to 'category' dtype.
-        Replaces null values in the "Medal" column with "No Medal".
-        Saves the transformed DataFrame to a Parquet file.
-    
-    Args:
-        data: The output from the upstream parent block (a pandas DataFrame)
-        args: The output from any additional upstream blocks (if applicable)
-    
-    Returns:
-        A transformed pandas DataFrame.
-    """
-    # Dropping the 'ID' column from the DataFrame
-    #data = data.drop('ID', axis=1)
-
-    # Replace null values in the "Medal" column with "No Medal"
-    #data['Medal'] = data['Medal'].fillna('No Medal')
-    
-    # List of categorical columns to be converted
-    #categorical_columns = [
-     #   'Sex', 'Team', 'NOC', 'Games', 'Season', 'City', 'Sport', 'Event', 'Medal']
-    
-    # Converting the specified columns to 'category' dtype
-    #data[categorical_columns] = data[categorical_columns].astype('category')
-
-    # Save the transformed DataFrame to a Parquet file
+    # Transform DataFrame to a Parquet file
     data.to_parquet('olympic_data_cleaned.parquet', index=False)
     
     return data

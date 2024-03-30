@@ -21,7 +21,7 @@
     * 2 points: Tables are created in DWH, but not optimized
     * 4 points: Tables are partitioned and clustered in a way that makes sense for the upstream queries (with explanation)
 ## Transformations (dbt, spark, etc)
-## User Comment: First transformation with Spark within Docker/Mage container. Secondary transformations made in Dbt cloud.
+### User Comment: First transformation with Spark within Docker/Mage container. Secondary transformations made in Dbt cloud.
     * 0 points: No tranformations
     * 2 points: Simple SQL transformation (no dbt or similar tools)
     * 4 points: Tranformations are defined with dbt, Spark or similar technologies
