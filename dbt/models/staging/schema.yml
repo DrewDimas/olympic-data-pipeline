@@ -1,16 +1,18 @@
 version: 2
 
 sources:
-  - name: olympic_source
-    database: your-bigquery-project-id
+  - name: olympic_data
+    database: datacamp2024-412820
     schema: olympic_data
     tables:
-      - name: green_tripdata
-      - name: yellow_tripdata
+      - name: male_data
+        description: "Source table for male athlete data."
+      - name: female_data
+        description: "Source table for female athlete data."
 
 models:
   - name: stg_athletes
-    description: "Staging model for athletes, preparing raw data for transformation."
+    description: "Staging model for athletes, preparing raw data from male and female datasets for transformation."
     columns:
       - name: name
         description: "The full name of the athlete."
@@ -21,8 +23,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['M', 'F']
-              quote: false
+              values: ["M", "F"]
       - name: age
         description: "The age of the athlete at the time of the Olympics."
         tests:
@@ -51,6 +52,8 @@ models:
         description: "The season of the Olympics (Summer or Winter)."
         tests:
           - not_null
+          - accepted_values:
+              values: ["Summer", "Winter"]
       - name: city
         description: "The host city of the Olympics."
         tests:
@@ -65,32 +68,14 @@ models:
           - not_null
       - name: medal
         description: "The medal won by the athlete, if any."
+        tests:
+          - accepted_values:
+              values: ["Gold", "Silver", "Bronze", "None"]
+              name: valid_medal_values_staging
       - name: sex_index
         description: "Numeric index derived from the sex column for machine learning models."
       - name: season_index
         description: "Numeric index derived from the season column for machine learning models."
 
   - name: dim_athletes
-    description: "Dimension table for athletes, containing unique athlete information."
-    columns:
-      - name: athlete_id
-        description: "A unique identifier for each athlete."
-        tests:
-          - unique
-          - not_null
-      - name: name
-      - name: sex
-      - name: age
-      - name: height
-      - name: weight
-      - name: team
-      - name: noc
-      - name: games
-      - name: year
-      - name: season
-      - name: city
-      - name: sport
-      - name: event
-      - name: medal
-      - name: sex_index
-      - name: season_index
+    description: "This is a placeholder for the dimension table model which will be further detailed in the core schema. It contains refined and unique athlete information ready for analytical queries."

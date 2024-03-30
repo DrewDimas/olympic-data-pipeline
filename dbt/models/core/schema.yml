@@ -7,26 +7,42 @@ models:
       - name: athlete_id
         description: "A unique identifier for each athlete, constructed from a combination of name and NOC."
         tests:
-          - unique
+          - unique:
+              name: unique_dim_athletes_athlete_id_core  # Custom unique name for this test
           - not_null
       - name: name
         description: "The full name of the athlete."
+        tests:
+          - not_null
       - name: sex
         description: "The gender of the athlete (M or F)."
+        tests:
+          - accepted_values:
+              values: ['M', 'F']
       - name: age
         description: "The age of the athlete at the time of the Olympics."
+        tests:
+          - not_null
       - name: height
         description: "The height of the athlete in centimeters."
       - name: weight
         description: "The weight of the athlete in kilograms."
       - name: team
         description: "The team or country the athlete represents."
+        tests:
+          - not_null
       - name: noc
         description: "The National Olympic Committee 3-letter code representing the team."
+        tests:
+          - not_null
       - name: sport
         description: "The sport in which the athlete competes."
+        tests:
+          - not_null
       - name: event
         description: "The specific event in which the athlete competes."
+        tests:
+          - not_null
 
   - name: fact_athlete_events
     description: "Fact table recording athlete performances in Olympic events."
@@ -42,14 +58,26 @@ models:
           - relationships:
               to: ref('dim_athletes')
               field: athlete_id
+          - not_null
       - name: year
         description: "The year of the Olympics."
+        tests:
+          - not_null
       - name: season
         description: "The season of the Olympics (Summer or Winter)."
+        tests:
+          - accepted_values:
+              values: ['Summer', 'Winter']
       - name: city
         description: "The host city of the Olympics."
+        tests:
+          - not_null
       - name: medal
         description: "The medal won by the athlete, if any."
+        tests:
+          - accepted_values:
+              values: ['Gold', 'Silver', 'Bronze', 'None']
+              name: valid_medal_values
       - name: sex_index
         description: "Numeric index derived from the sex column for machine learning models."
       - name: season_index
@@ -60,11 +88,22 @@ models:
     columns:
       - name: year
         description: "The year of the Olympics."
+        tests:
+          - not_null
       - name: season
         description: "The season of the Olympics (Summer or Winter)."
+        tests:
+          - accepted_values:
+              values: ['Summer', 'Winter']
       - name: noc
         description: "The National Olympic Committee 3-letter code."
+        tests:
+          - not_null
       - name: sport
         description: "The sport."
+        tests:
+          - not_null
       - name: medal_count
         description: "The count of medals won."
+        tests:
+          - not_null
