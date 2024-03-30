@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import avg, col, lit, when
-from pyspark.sql.types import StringType
-from pyspark.sql import DataFrame as PySparkDataFrame
+from pyspark.sql.functions import col, when, lit
+from pyspark.sql.types import IntegerType, StringType  
 from pyspark.ml.feature import StringIndexer
+from pyspark.sql import DataFrame as PySparkDataFrame
 
 if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
@@ -23,24 +23,27 @@ def transform(data, *args, **kwargs):
     if not isinstance(data, PySparkDataFrame):
         data = spark.createDataFrame(data)
 
+     # Convert all column names to lowercase
+    for col_name in data.columns:
+        data = data.withColumnRenamed(col_name, col_name.lower())
+
     # Check if 'ID' column exists before trying to drop it
-    if 'ID' in data.columns:
-        data = data.drop('ID')
+    if 'id' in data.columns:
+        data = data.drop('id')
 
-    # Replace null values in the "Medal" column with "No Medal"
-    data = data.withColumn("Medal", when(col("Medal").isNull(), lit("No Medal")).otherwise(col("Medal")))
-
+    # Replace null values in "medal" with "No Medal"
+    data = data.withColumn("medal", when(col("medal").isNull(), lit("No Medal")).otherwise(col("medal")))
+    
     #Converting to numeric indices for potential ML tasks:
-    indexer_sex = StringIndexer(inputCol="Sex", outputCol="Sex_Index")
+    indexer_sex = StringIndexer(inputCol="sex", outputCol="sex_index")
     data = indexer_sex.fit(data).transform(data)
 
-    indexer_season = StringIndexer(inputCol="Season", outputCol="Season_Index")
+    indexer_season = StringIndexer(inputCol="season", outputCol="season_index")
     data = indexer_season.fit(data).transform(data)
 
     # Filter out entries 
-    data_male = data.filter(col("Sex") == 'M')
+    data_male = data.filter(col("sex") == 'M')
     
-   # return {'data_recent': data_recent, 'data_female': data_female, 'data_male': data_male}
     data_male = data_male.toPandas() 
     return data_male
 
