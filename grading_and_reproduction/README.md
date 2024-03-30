@@ -5,7 +5,7 @@
 ## Evaluation Criteria
 
 * Problem description
-**Comment**: Problem description described in README in main directory. 
+### Comment: Problem description described in README in main directory. 
     * 0 points: Problem is not described
     * 2 points: Problem is described but shortly or not clearly 
     * 4 points: Problem is well described and it's clear what the problem the project solves
