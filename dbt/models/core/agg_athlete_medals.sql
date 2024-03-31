@@ -18,7 +18,7 @@ SELECT
     noc,
     team,
     sport,
-    COUNT(is_medal) AS medal_count
+    SUM(is_medal) AS medal_count
 FROM medal_records
 WHERE is_medal = 1
 GROUP BY
