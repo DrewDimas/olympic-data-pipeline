@@ -1,15 +1,9 @@
 version: 2
 
 models:
-  - name: dim_athletes
+  - name: olympic_all
     description: "Dimension table for athletes, containing unique athlete information."
     columns:
-      - name: athlete_id
-        description: "A unique identifier for each athlete, constructed from a combination of name and NOC."
-        tests:
-          - unique:
-              name: unique_dim_athletes_athlete_id_core  # Custom unique name for this test
-          - not_null
       - name: name
         description: "The full name of the athlete."
         tests:
@@ -19,13 +13,12 @@ models:
         tests:
           - accepted_values:
               values: ['M', 'F']
+              name: valid_sex_values
       - name: age
         description: "The age of the athlete at the time of the Olympics."
-        tests:
-          - not_null
-      - name: height
+      - name: height_cm
         description: "The height of the athlete in centimeters."
-      - name: weight
+      - name: weight_kg
         description: "The weight of the athlete in kilograms."
       - name: team
         description: "The team or country the athlete represents."
@@ -35,6 +28,14 @@ models:
         description: "The National Olympic Committee 3-letter code representing the team."
         tests:
           - not_null
+      - name: games
+        description: "The Olympic Games the athlete participated in."
+      - name: year
+        description: "The year of the Olympics."
+      - name: season
+        description: "The season of the Olympics (Summer or Winter)."
+      - name: city
+        description: "The host city of the Olympics."
       - name: sport
         description: "The sport in which the athlete competes."
         tests:
@@ -43,45 +44,21 @@ models:
         description: "The specific event in which the athlete competes."
         tests:
           - not_null
-
-  - name: fact_athlete_events
-    description: "Fact table recording athlete performances in Olympic events."
-    columns:
-      - name: athlete_event_id
-        description: "A unique identifier for each athlete's participation in an event, constructed from athlete_id and event details."
-        tests:
-          - unique
-          - not_null
-      - name: athlete_id
-        description: "Reference to dim_athletes table."
-        tests:
-          - relationships:
-              to: ref('dim_athletes')
-              field: athlete_id
-          - not_null
-      - name: year
-        description: "The year of the Olympics."
-        tests:
-          - not_null
-      - name: season
-        description: "The season of the Olympics (Summer or Winter)."
-        tests:
-          - accepted_values:
-              values: ['Summer', 'Winter']
-      - name: city
-        description: "The host city of the Olympics."
-        tests:
-          - not_null
       - name: medal
         description: "The medal won by the athlete, if any."
         tests:
           - accepted_values:
-              values: ['Gold', 'Silver', 'Bronze', 'None']
+              values: ['Gold', 'Silver', 'Bronze', 'No Medal']
               name: valid_medal_values
       - name: sex_index
         description: "Numeric index derived from the sex column for machine learning models."
       - name: season_index
         description: "Numeric index derived from the season column for machine learning models."
+      - name: height_ft_in
+        description: "The height of the athlete converted to feet and inches."
+      - name: weight_lb
+        description: "The weight of the athlete converted to pounds."
+
 
   - name: agg_athlete_medals
     description: "Aggregated table of medals won by athletes, partitioned by year and season, and clustered by noc and sport."
@@ -107,3 +84,33 @@ models:
         description: "The count of medals won."
         tests:
           - not_null
+
+  - name: olympic_all_partition_cluster
+    description: "Aggregated table of athletes' information, partitioned by year and clustered by noc, season, and sport."
+    config:
+      materialized: 'table'
+      partition_by:
+        field: "year"
+        data_type: "INT64"
+      cluster_by:
+        - 'noc'
+        - 'season'
+        - 'sport'
+    columns:
+      - name: name
+        description: "The full name of the athlete."
+        tests:
+          - not_null
+      - name: year
+        description: "The year of the Olympics."
+      - name: noc
+        description: "The National Olympic Committee 3-letter code representing the team."
+      - name: season
+        description: "The season of the Olympics (Summer or Winter)."
+      - name: sport
+        description: "The sport in which the athlete competes."
+      - name: height_ft_in
+        description: "The height of the athlete converted to feet and inches."
+      - name: weight_lb
+        description: "The weight of the athlete converted to pounds."
+

@@ -1,3 +1,6 @@
+{{ config(
+    materialized='table',
+   ) }}
 WITH male_athletes AS (
     SELECT 
         name,
