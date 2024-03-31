@@ -24,4 +24,7 @@ Segment 2: Docker / Mage / Spark
 
     # Run pipeline named gcs_clean_to_bigquery (This will import parquet from GCS, perform basic clean/transformation on dataset, split into two tables (male & female), and upload to bigquery.
     
+Segment 3: Dbt
 
+    # Set dbt folder as home project directoy
+    

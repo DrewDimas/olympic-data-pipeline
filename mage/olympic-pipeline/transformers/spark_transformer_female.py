@@ -31,9 +31,6 @@ def transform(data, *args, **kwargs):
     if 'id' in data.columns:
         data = data.drop('id')
 
-    # Replace null values in "medal" with "No Medal"
-    data = data.withColumn("medal", when(col("medal").isNull(), lit("No Medal")).otherwise(col("medal")))
-    
     #Converting to numeric indices for potential ML tasks:
     indexer_sex = StringIndexer(inputCol="sex", outputCol="sex_index")
     data = indexer_sex.fit(data).transform(data)

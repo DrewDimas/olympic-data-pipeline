@@ -22,5 +22,5 @@ resource "google_storage_bucket" "olympic_raw_data_bucket" {
 resource "google_bigquery_dataset" "olympic_data_dataset" {
   dataset_id                  = var.bq_dataset_name
   location                    = var.location
-  default_table_expiration_ms = 3600000 # Optional: Sets default table expiration to 1 hour. Adjust as needed.
+  default_table_expiration_ms = null # Optional: Sets default table expiration to 1 hour. Adjust as needed.
 }
