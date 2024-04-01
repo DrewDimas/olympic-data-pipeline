@@ -56,8 +56,6 @@ The objective of this project is twofold:
 - **Action:** Creates interactive dashboards and reports for data visualization and insights, benefiting from the optimized data structure.
 - **Data Output:** Engaging visualizations that provide actionable insights to stakeholders.
 
-This pipeline facilitates a streamlined workflow from data ingestion to visualization, leveraging the integration of Mage and Apache Spark within a Docker container to simplify the processing steps and enhance the efficiency of the overall pipeline.
-
 ---
 ## Data Engineering Zoomcamp
 
