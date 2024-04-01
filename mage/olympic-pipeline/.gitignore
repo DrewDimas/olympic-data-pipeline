@@ -1,14 +1,26 @@
+# System files
 .DS_Store
-.file_versions
-.gitkeep
-.log
-.logs/
+
+# Temporary files or folders used by Mage or during development
 .mage_temp_profiles
-.preferences.yaml
 .variables/
 __pycache__/
-docker-compose.override.yml
 logs/
-mage-ai.db
-mage_data/
+*.log
+
+# Personal preferences or settings that should not be version-controlled
+.preferences.yaml
+
+# Files or folders that may contain sensitive information or are specific to a user's environment
 secrets/
+mage-ai.db
+
+# Docker override configurations (if you wish to keep your Docker configuration generic and consistent across environments)
+docker-compose.override.yml
+
+# Special instructions to keep the keys folder but ignore its contents, except for .gitkeep
+keys/*
+!keys/.gitkeep
+
+# Ignore file versions if it's a folder or a specific setup - adjust if it's a specific file or provide more context
+.file_versions

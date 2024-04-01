@@ -28,13 +28,13 @@ The objective of this project is twofold:
 
 ## Data Ingestion (Initial Data Loading into GCS)
 
-- **Data Input:** Raw Olympic data collected from various internet sources.
+- **Data Input:** Raw Olympic data collected from [here.](https://figshare.com/articles/dataset/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) 
 - **Action:** Utilizes a Docker container with Mage to automate the initial data ingestion process, directly loading raw data into Google Cloud Storage (GCS) without immediate processing. This step prepares the data for subsequent processing and ensures it is securely stored in a scalable cloud environment.
 - **Data Output to:** Raw data securely stored in Google Cloud Storage, ready for detailed processing and transformation.
 
 ## Docker Container (Data Processing with Mage and Apache Spark)
 
-- **Data Input:** Raw data from Google Cloud Storage (GCS), previously ingested from internet sources.
+- **Data Input:** Raw data from Google Cloud Storage (GCS), previously ingested from internet source.
 - **Action:** Hosts a separate Docker container equipped with Mage and Apache Spark to perform comprehensive data processing. This phase includes cleaning the raw data, transforming it into a structured format, and performing necessary aggregations and data enrichment tasks to prepare it for analytical queries and visualization.
 - **Data Output to:** Processed and structured data, optimized for analysis, is loaded into Google BigQuery for subsequent storage, further transformations, and analysis.
 ata Output to:** Processed data ready for loading into BigQuery for subsequent storage and analysis.
