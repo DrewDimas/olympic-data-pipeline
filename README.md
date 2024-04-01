@@ -37,7 +37,6 @@ The objective of this project is twofold:
 - **Data Input:** Raw data from Google Cloud Storage (GCS), previously ingested from internet source.
 - **Action:** Hosts a separate Docker container equipped with Mage and Apache Spark to perform comprehensive data processing. This phase includes cleaning the raw data, transforming it into a structured format, and performing necessary aggregations and data enrichment tasks to prepare it for analytical queries and visualization.
 - **Data Output to:** Processed and structured data, optimized for analysis, is loaded into Google BigQuery for subsequent storage, further transformations, and analysis.
-ata Output to:** Processed data ready for loading into BigQuery for subsequent storage and analysis.
 
 ## Google BigQuery (Data Analysis and Storage)
 
@@ -58,4 +57,30 @@ ata Output to:** Processed data ready for loading into BigQuery for subsequent s
 - **Data Output:** Engaging visualizations that provide actionable insights to stakeholders.
 
 This pipeline facilitates a streamlined workflow from data ingestion to visualization, leveraging the integration of Mage and Apache Spark within a Docker container to simplify the processing steps and enhance the efficiency of the overall pipeline.
+
+---
+## Data Engineering Zoomcamp
+
+This project was developed as part of the [Data Engineering Zoomcamp](https://www.datatalks.club/courses/2024-data-engineering-zoomcamp.html) by DataTalks.Club, a comprehensive course designed to provide hands-on experience with the latest technologies in data engineering. Throughout the course, participants engage with topics ranging from containerization and infrastructure as code to workflow orchestration, data warehouses, analytics engineering, batch processing, and streaming.
+
+### Acknowledgments
+
+Special thanks to the instructors and organizers from DataTalks.Club, including Ankush Khanna, Victoria Perez Mola, Alexey Grigorev, Matt Palmer, Luis Oliveira, and Michael Shoemaker, for creating an engaging and educational experience.
+
+I extend my gratitude to all the data scientists, developers, and researchers who have contributed to the Olympic data collection, as well as to the open-source tools and platforms that made this analysis possible. A special thank you to the volunteers and organizations maintaining the historical Olympic data sets and providing open access for educational and research purposes.
+
+## Further Reading
+
+For those interested in exploring more about Olympic history, data analysis techniques, or the technology stack used in this project, we recommend the following resources:
+
+- [International Olympic Committee (IOC)](https://www.olympic.org/)
+- [Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+- [dbt Documentation](https://docs.getdbt.com/)
+- [Google BigQuery Documentation](https://cloud.google.com/bigquery/docs)
+- [Docker Get Started Guide](https://docs.docker.com/get-started/)
+
+## License
+
+This project is released under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
 
