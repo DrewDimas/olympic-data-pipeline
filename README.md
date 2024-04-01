@@ -51,7 +51,7 @@ ata Output to:** Processed data ready for loading into BigQuery for subsequent s
 - **Action:** Performs SQL-based transformations and modeling within BigQuery to refine data for analysis, utilizing partitioned and clustered tables for efficient data manipulation.
 - **Data Output to:** Refined and modeled data within BigQuery, ready for visualization.
 
-## Google Data Studio (Visualization)
+## Google Data Studio (Visualization) - [Click here.](https://lookerstudio.google.com/reporting/ad0360d8-04d4-4dec-9184-897b87895043/page/LS0uD) 
 
 - **Data Input:** The transformed and modeled data within BigQuery.
 - **Action:** Creates interactive dashboards and reports for data visualization and insights, benefiting from the optimized data structure.
